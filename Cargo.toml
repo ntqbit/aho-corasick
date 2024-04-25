@@ -1,0 +1,10 @@
+[package]
+name = "aho-corasick"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dot = { version = "0.1.4", optional = true }
+
+[features]
+dot = ["dep:dot"]

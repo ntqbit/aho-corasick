@@ -1,0 +1,41 @@
+digraph automation {
+    N0[label=""];
+    N1[label=<C>];
+    N2[label=<A<font point-size="10"><br/>A</font>>];
+    N3[label=<N<font point-size="10"><br/>CAN<br/>AN</font>>];
+    N4[label=<A<font point-size="10"><br/>A</font>>];
+    N5[label=<N<font point-size="10"><br/>AN</font>>];
+    N6[label=<s>];
+    N7[label=<h>];
+    N8[label=<e<font point-size="10"><br/>she<br/>he</font>>];
+    N9[label=<h>];
+    N10[label=<e<font point-size="10"><br/>he</font>>];
+    N11[label=<r>];
+    N12[label=<s<font point-size="10"><br/>hers</font>>];
+    N0 -> N1[label=""][style="solid"];
+    N0 -> N4[label=""][style="solid"];
+    N0 -> N6[label=""][style="solid"];
+    N0 -> N9[label=""][style="solid"];
+    N0 -> N0[label=""][style="dashed"];
+    N1 -> N2[label=""][style="solid"];
+    N1 -> N0[label=""][style="dashed"];
+    N2 -> N3[label=""][style="solid"];
+    N2 -> N4[label=""][style="dashed"];
+    N3 -> N5[label=""][style="dashed"];
+    N4 -> N5[label=""][style="solid"];
+    N4 -> N0[label=""][style="dashed"];
+    N5 -> N0[label=""][style="dashed"];
+    N6 -> N7[label=""][style="solid"];
+    N6 -> N0[label=""][style="dashed"];
+    N7 -> N8[label=""][style="solid"];
+    N7 -> N9[label=""][style="dashed"];
+    N8 -> N10[label=""][style="dashed"];
+    N9 -> N10[label=""][style="solid"];
+    N9 -> N0[label=""][style="dashed"];
+    N10 -> N11[label=""][style="solid"];
+    N10 -> N0[label=""][style="dashed"];
+    N11 -> N12[label=""][style="solid"];
+    N11 -> N0[label=""][style="dashed"];
+    N12 -> N6[label=""][style="dashed"];
+}
+
