@@ -13,11 +13,19 @@ pub trait Pattern {
     fn iter(&self) -> impl Iterator<Item = Self::Char>;
 }
 
-impl Pattern for String {
+impl Pattern for &str {
     type Char = char;
 
     fn iter(&self) -> impl Iterator<Item = Self::Char> {
         self.chars()
+    }
+}
+
+impl<P: Pattern> Pattern for &P {
+    type Char = P::Char;
+
+    fn iter(&self) -> impl Iterator<Item = Self::Char> {
+        (*self).iter()
     }
 }
 
@@ -55,14 +63,14 @@ impl<C: Eq + Hash> AutomationNode<C> {
 
 pub struct Automation<P: Pattern> {
     nodes: Vec<AutomationNode<P::Char>>,
-    outputs: Vec<P>,
+    output_cnt: usize,
 }
 
 impl<P: Pattern> Automation<P> {
     pub fn build(items: impl Iterator<Item = P>) -> Self {
         let mut automation = Automation {
             nodes: Vec::new(),
-            outputs: Vec::new(),
+            output_cnt: 0,
         };
 
         // Add root node
@@ -94,9 +102,9 @@ impl<P: Pattern> Automation<P> {
             }
         }
 
-        let output_idx = self.outputs.len();
+        let output_idx = self.output_cnt;
         self.nodes[node_idx].add_output(output_idx);
-        self.outputs.push(item);
+        self.output_cnt += 1;
     }
 
     fn get_node(&self, idx: usize) -> &AutomationNode<P::Char> {
@@ -166,10 +174,6 @@ impl<P: Pattern> Automation<P> {
 
     pub fn search(&self) -> AutomationSearch<P> {
         AutomationSearch::new(self)
-    }
-
-    pub fn get_outputs(&self) -> &[P] {
-        &self.outputs
     }
 }
 

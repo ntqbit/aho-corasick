@@ -1,11 +1,7 @@
 use aho_corasick::Automation;
 
 fn main() {
-    let automation = Automation::build(
-        ["CAN", "AN", "A", "she", "he", "hers"]
-            .map(|x| x.to_string())
-            .into_iter(),
-    );
+    let automation = Automation::build(["CAN", "AN", "A", "she", "he", "hers"].into_iter());
 
     #[cfg(feature = "dot")]
     println!("{}", automation.dump().to_dot().unwrap());

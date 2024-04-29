@@ -19,7 +19,6 @@ type EdgeDesc = (usize, EdTarget);
 pub struct AutomationDump {
     nodes: Vec<AutomationDumpNode>,
     edges: Vec<EdgeDesc>,
-    outputs: Vec<String>,
 }
 
 impl AutomationDump {
@@ -28,7 +27,6 @@ impl AutomationDump {
         P: Pattern + ToString,
         P::Char: ToString,
     {
-        let outputs = automation.outputs.iter().map(|x| x.to_string()).collect();
         let mut nodes: Vec<AutomationDumpNode> = automation
             .nodes
             .iter()
@@ -49,11 +47,7 @@ impl AutomationDump {
             edges.push((idx, EdTarget::Failure(node.failure)));
         }
 
-        Self {
-            nodes,
-            outputs,
-            edges,
-        }
+        Self { nodes, edges }
     }
 }
 
@@ -92,7 +86,7 @@ mod dotdump {
 
                 for &output in &node.outputs {
                     s.push_str("<br/>");
-                    s.push_str(&self.outputs[output]);
+                    s.push_str(&output.to_string());
                 }
 
                 s.push_str("</font>");
